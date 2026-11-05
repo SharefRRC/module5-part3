@@ -1,5 +1,10 @@
-# Continuous integration: runs backend tests on changes to the repository.
-# Provides an auditable test result; it does not by itself certify security.
+# This GitHub Actions workflow automatically checks our project
+# whenever changes are pushed to the master branch.
+# It installs the required Python packages, runs backend tests,
+# and builds Docker images to make sure everything works.
+# This helps us catch errors before deploying the application.
+
+name: YMB CI Pipeline
 name: YMB CI Pipeline
 on:
   push:
