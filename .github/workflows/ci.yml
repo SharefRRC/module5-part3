@@ -1,0 +1,24 @@
+# Continuous integration: runs backend tests on changes to the repository.
+# Provides an auditable test result; it does not by itself certify security.
+name: YMB CI Pipeline
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: python -m pip install -r backend/requirements.txt
+      - name: Run backend tests
+        run: python -m pytest backend/tests -q
+      - name: Build Docker images
+        run: docker compose build
